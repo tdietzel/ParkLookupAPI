@@ -37,4 +37,59 @@ public class StateController : ControllerBase
 
     return parks;
   }
+
+  [HttpPost("Park")]
+  public async Task<ActionResult<StatePark>> Post(StatePark park)
+  {
+    _db.StateParks.Add(park);
+    await _db.SaveChangesAsync();
+    return CreatedAtAction(nameof(GetParks), new { id = park.StateParkId }, park);
+  }
+
+  private bool ParkExists(int id)
+  {
+    return _db.StateParks.Any(park => park.StateParkId == id);
+  }
+  [HttpPut("Park/{id}")]
+  public async Task<IActionResult> Put(int id, StatePark park)
+  {
+    if (id != park.StateParkId)
+    {
+      return BadRequest();
+    }
+
+    _db.StateParks.Update(park);
+
+    try 
+    {
+      await _db.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+      if (!ParkExists(id))
+      {
+        return NotFound();
+      }
+      else
+      {
+        throw;
+      }
+    }
+
+    return NoContent();
+  }
+
+  [HttpDelete("Park/{id}")]
+  public async Task<IActionResult> DeletePark(int id)
+  {
+    StatePark park = await _db.StateParks.FindAsync(id);
+    if (park == null)
+    {
+      return NotFound();
+    }
+    _db.StateParks.Remove(park);
+    await _db.SaveChangesAsync();
+
+    return NoContent();
+  }
 }
