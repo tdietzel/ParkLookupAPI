@@ -3,6 +3,7 @@ namespace ParkLookup.Models
   public class State
   {
     public int StateId { get; set; }
+    public string Name { get; set; }
     public List<StatePark> Parks { get; set; }
   }
 
