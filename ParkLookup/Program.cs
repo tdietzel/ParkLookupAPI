@@ -4,7 +4,7 @@ using ParkLookup.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<MessageBoardApiContext>(
+builder.Services.AddDbContext<ParkLookupContext>(
     dbContextOptions => dbContextOptions
     .UseMySql(
         builder.Configuration["ConnectionStrings:DefaultConnection"],
@@ -13,7 +13,7 @@ builder.Services.AddDbContext<MessageBoardApiContext>(
 );
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<MessageBoardApiContext>()
+    .AddEntityFrameworkStores<ParkLookupContext>()
 .AddDefaultTokenProviders();
 
 builder.Services.AddControllers();
