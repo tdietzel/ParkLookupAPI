@@ -21,6 +21,7 @@ public class NationalController : ControllerBase
     return await _db.National.Include(s => s.Parks).ToListAsync();
   }
 
+  [Authorize]
   [HttpPost("Park")]
   public async Task<ActionResult<NationalPark>> Post(NationalPark park)
   {
@@ -33,6 +34,7 @@ public class NationalController : ControllerBase
   {
     return _db.NationalParks.Any(park => park.NationalParkId == id);
   }
+  [Authorize]
   [HttpPut("Park/{id}")]
   public async Task<IActionResult> Put(int id, NationalPark park)
   {
@@ -62,6 +64,7 @@ public class NationalController : ControllerBase
     return NoContent();
   }
 
+  [Authorize]
   [HttpDelete("Park/{id}")]
   public async Task<IActionResult> DeletePark(int id)
   {

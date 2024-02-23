@@ -15,7 +15,7 @@ public class StateController : ControllerBase
     _db = db;
   }
 
-  [HttpGet]
+  [HttpGet("Park")]
   public async Task<ActionResult<List<State>>> Get()
   {
     return await _db.States.Include(s => s.Parks).ToListAsync();
@@ -38,6 +38,7 @@ public class StateController : ControllerBase
     return parks;
   }
 
+  [Authorize]
   [HttpPost("Park")]
   public async Task<ActionResult<StatePark>> Post(StatePark park)
   {
@@ -50,6 +51,7 @@ public class StateController : ControllerBase
   {
     return _db.StateParks.Any(park => park.StateParkId == id);
   }
+  [Authorize]
   [HttpPut("Park/{id}")]
   public async Task<IActionResult> Put(int id, StatePark park)
   {
@@ -78,7 +80,7 @@ public class StateController : ControllerBase
 
     return NoContent();
   }
-
+  [Authorize]
   [HttpDelete("Park/{id}")]
   public async Task<IActionResult> DeletePark(int id)
   {
