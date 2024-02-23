@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ParkLookup.Models
 {
-  public class ParkLookupDbContext : IdentityDbContext<ApplicationUser>
+  public class ParkLookupContext : IdentityDbContext<ApplicationUser>
   {
-    public ParkLookupDbContext(DbContextOptions options) : base(options) { }
-
+    public DbSet<State> States { get; set; }
+    public DbSet<StatePark> StateParks { get; set; }
+    public ParkLookupContext(DbContextOptions options) : base(options) { }
   }
-
 }
