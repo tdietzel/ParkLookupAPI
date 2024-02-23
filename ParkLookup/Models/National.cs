@@ -3,6 +3,7 @@ namespace ParkLookup.Models
   public class National
   {
     public int NationalId { get; set; }
+    public string Name { get; set; }
     public List<NationalPark> Parks { get; set; }
   }
 

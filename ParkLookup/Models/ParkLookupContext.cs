@@ -67,6 +67,11 @@ namespace ParkLookup.Models
         new State { StateId = 49, Name = "Wisconsin" },
         new State { StateId = 50, Name = "Wyoming" }
       );
+
+      builder.Entity<National>()
+      .HasData(
+        new National { NationalId = 1, Name = "National Parks Conservation Association"}
+      );
     }
   }
 }
