@@ -28,4 +28,51 @@ public class NationalController : ControllerBase
     await _db.SaveChangesAsync();
     return CreatedAtAction(nameof(Get), new { id = park.NationalParkId }, park);
   }
+
+  private bool ParkExists(int id)
+  {
+    return _db.NationalParks.Any(park => park.NationalParkId == id);
+  }
+  [HttpPut("Park/{id}")]
+  public async Task<IActionResult> Put(int id, NationalPark park)
+  {
+    if (id != park.NationalParkId)
+    {
+      return BadRequest();
+    }
+
+    _db.NationalParks.Update(park);
+
+    try 
+    {
+      await _db.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+      if (!ParkExists(id))
+      {
+        return NotFound();
+      }
+      else
+      {
+        throw;
+      }
+    }
+
+    return NoContent();
+  }
+
+  [HttpDelete("Park/{id}")]
+  public async Task<IActionResult> DeletePark(int id)
+  {
+    NationalPark park = await _db.NationalParks.FindAsync(id);
+    if (park == null)
+    {
+      return NotFound();
+    }
+    _db.NationalParks.Remove(park);
+    await _db.SaveChangesAsync();
+
+    return NoContent();
+  }
 }
