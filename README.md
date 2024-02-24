@@ -133,18 +133,18 @@ $ dotnet tool install --global dotnet-ef --version 6.0.0
   ```
 {
     "Logging": {
-        "LogLevel": {
+      "LogLevel": {
         "Default": "Warning"
-        }
+      }
     },
     "AllowedHosts": "*",
     "ConnectionStrings": {
-        "DefaultConnection": "Server=YourServerName;database=YourDatabaseName;uid=YourUsername;pwd=YourPassword;"
+      "DefaultConnection": "Server=YourServerName;database=YourDatabaseName;uid=YourUsername;pwd=YourPassword;"
     },
     "JwtSettings": {
-    "ValidIssuer": "ParkLookup-audience",
-    "ValidAudience": "ParkLookup-issuer",
-    "SecretKey": "256_BIT_SECRET_REQUIRED"
+      "ValidIssuer": "ParkLookup-audience",
+      "ValidAudience": "ParkLookup-issuer",
+      "SecretKey": "256_BIT_SECRET_REQUIRED"
     }
 }
   ```
@@ -175,7 +175,7 @@ To explore the Park Lookup API with NSwag, launch the project using `dotnet run`
 
 ### Using the JSON Web Token
 In order to be authorized to use the POST, PUT, DELETE functionality of the API, please authenticate yourself through Postman.
-##### Registration
+#### Registration
 * Open Postman and create a POST request using the URL: `https://localhost:7050/api/Accounts/register`
 * Add the following query to the request as raw data in the Body tab:
 ```
@@ -188,7 +188,7 @@ In order to be authorized to use the POST, PUT, DELETE functionality of the API,
 ```
 * The password must contain at least `six characters`, `one non-alphanumeric character`, at least `one digit lowercase letter`, at least `one uppercase letter` and at least `two unique characters`.
 
-##### Sign In
+#### Sign In
 Now that you've registered an account with the API, you'll need to authenticate your account and generate the JSON Web Token. I'll be using Postman again for this example.
 
 Let's setup another POST request using the URL: `https://localhost:7050/api/Accounts/signin`
@@ -201,7 +201,7 @@ Let's setup another POST request using the URL: `https://localhost:7050/api/Acco
 ```
 * Successfully logging in will generate a token in the response.
 
-##### Using the JSON Web Token
+#### Using the JSON Web Token
 Copy the token from the response, and add it as an authorization header to your POST, PUT or DELETE query. On the authorization 'Type', make sure that is set to 'Bearer Token', and then paste in the token in the field on the right.
 
 ### Note on CORS
